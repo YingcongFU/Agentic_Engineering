@@ -1,0 +1,192 @@
+[
+  {
+    "source": "pricing.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Pricing Policy\n\nNovaTech uses transparent, consistent pricing for its software products and services. Current prices, included usage, billing intervals, and applicable limits are presented in the customer\u2019s order form, online checkout page, or signed agreement. Unless otherwise stated, prices exclude taxes, duties, bank charges, and optional professional services.\n\nSubscriptions may be billed monthly or annually in advance. Annual plans may include a discount in exchange for a longer"
+  },
+  {
+    "source": "pricing.md",
+    "chunk_id": 1,
+    "text": "s may include a discount in exchange for a longer commitment. Usage-based charges are calculated from NovaTech\u2019s system records and added to the next invoice. Customers are responsible for reviewing plan limits and monitoring authorized user activity.\n\nNovaTech may offer free trials, promotional rates, nonprofit pricing, or startup discounts. Such offers may have eligibility requirements, expiration dates, usage limits, and renewal conditions. Promotions cannot be combined unless expressly state"
+  },
+  {
+    "source": "pricing.md",
+    "chunk_id": 2,
+    "text": "omotions cannot be combined unless expressly stated. When a trial ends, paid service begins only according to the acceptance and billing terms shown at signup.\n\nCustomers may upgrade at any time. Upgrade charges are generally prorated for the remaining billing period. Downgrades normally take effect at the next renewal and may reduce access to features, storage, or support. NovaTech will provide reasonable notice before a pricing change applies to an existing subscription, except when immediate"
+  },
+  {
+    "source": "pricing.md",
+    "chunk_id": 3,
+    "text": "o an existing subscription, except when immediate changes are required by law, tax rules, or third-party fees.\n\nInvoices are due on the date stated in the applicable agreement. Overdue accounts may be subject to reminders, late charges where permitted, service restriction, or suspension. Customers should contact Billing promptly to dispute an invoice; undisputed amounts remain payable.\n\nFees are nonrefundable except as required by law or stated in the customer agreement. If this policy conflicts"
+  },
+  {
+    "source": "pricing.md",
+    "chunk_id": 4,
+    "text": "n the customer agreement. If this policy conflicts with a signed order form or master agreement, the signed agreement controls. NovaTech may correct obvious pricing errors before accepting an order."
+  },
+  {
+    "source": "product_features.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Product Features Policy\n\nNovaTech develops cloud-based tools that help teams organize work, collaborate securely, automate routine processes, and understand operational performance. Available features depend on the customer\u2019s plan, region, configuration, and contract. The current plan description or order form identifies the features included in a purchase.\n\nCore capabilities may include shared workspaces, project and task management, real-time collaboration, search, file attachments,"
+  },
+  {
+    "source": "product_features.md",
+    "chunk_id": 1,
+    "text": "real-time collaboration, search, file attachments, notifications, dashboards, reporting, workflow automation, and integrations with approved third-party services. Administrative features may include user management, access roles, activity records, security settings, and usage controls.\n\nNovaTech may release features in preview, beta, early-access, or experimental form. Such features are optional, may be incomplete, and can change or be discontinued without the notice normally provided for genera"
+  },
+  {
+    "source": "product_features.md",
+    "chunk_id": 2,
+    "text": "ed without the notice normally provided for generally available features. Customers should not rely on preview features for critical operations unless NovaTech agrees otherwise in writing.\n\nSome functionality uses artificial intelligence to summarize, classify, recommend, or generate content. AI-generated output may be inaccurate and must be reviewed by a qualified person before it is used for important business, legal, financial, employment, safety, or compliance decisions. Customers are respon"
+  },
+  {
+    "source": "product_features.md",
+    "chunk_id": 3,
+    "text": "ety, or compliance decisions. Customers are responsible for ensuring their use of AI features is lawful and appropriate.\n\nIntegrations depend on third-party platforms that NovaTech does not control. Their availability, permissions, and behavior may change. Customers must maintain any required third-party accounts and comply with the applicable third-party terms.\n\nNovaTech continuously improves the product and may modify interfaces, workflows, or supporting technology. When practical, NovaTech wi"
+  },
+  {
+    "source": "product_features.md",
+    "chunk_id": 4,
+    "text": "supporting technology. When practical, NovaTech will provide advance notice of changes that materially reduce a generally available core feature. Documentation describes intended operation but does not create a warranty beyond the customer\u2019s agreement. Feature requests are welcomed but do not create a commitment or delivery date unless included in a signed contract."
+  },
+  {
+    "source": "customer_support.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Customer Support Policy\n\nNovaTech provides customer support to help authorized users resolve technical issues, understand product behavior, and use purchased features effectively. Support channels, hours, response targets, and service levels vary by subscription plan and are listed in the customer\u2019s agreement or support portal.\n\nCustomers should search NovaTech\u2019s documentation and service-status page before opening a case. A support request should include the account name, affected us"
+  },
+  {
+    "source": "customer_support.md",
+    "chunk_id": 1,
+    "text": "quest should include the account name, affected users, a clear description, steps to reproduce the issue, relevant timestamps, expected behavior, and screenshots or logs that do not expose unnecessary sensitive data. Customers must not submit passwords, private authentication keys, or regulated data unless specifically instructed through an approved secure channel.\n\nNovaTech assigns priority according to severity and business impact. Critical priority generally means a production service is unav"
+  },
+  {
+    "source": "customer_support.md",
+    "chunk_id": 2,
+    "text": "ority generally means a production service is unavailable for most users or a confirmed security event is actively causing harm. High priority covers major degradation without a reasonable workaround. Standard priority covers limited-impact defects, configuration questions, and general guidance. NovaTech may adjust priority after reviewing the facts.\n\nInitial response targets measure the time until support acknowledges and begins assessing a case; they do not guarantee resolution within that per"
+  },
+  {
+    "source": "customer_support.md",
+    "chunk_id": 3,
+    "text": "; they do not guarantee resolution within that period. Resolution time depends on reproducibility, complexity, third-party dependencies, and customer cooperation. Customers must provide timely information, maintain a knowledgeable contact, and test proposed solutions when reasonable.\n\nSupport does not include custom development, management of third-party systems, formal training, data entry, or strategic consulting unless separately purchased. NovaTech may close cases that are resolved, duplicat"
+  },
+  {
+    "source": "customer_support.md",
+    "chunk_id": 4,
+    "text": "vaTech may close cases that are resolved, duplicated, outside support scope, or awaiting customer response for an extended period. Closed cases may be reopened or referenced in a new request.\n\nSecurity vulnerabilities should be reported through NovaTech\u2019s designated security channel rather than ordinary support. Customer-facing incident updates will be provided through appropriate status or account communications."
+  },
+  {
+    "source": "api_limits.md",
+    "chunk_id": 0,
+    "text": "# NovaTech API Limits\n\nBasic customers may make up to 100 API requests per minute.\n\nPro customers may make up to 1,000 API requests per minute.\n\nEnterprise customers receive configurable API rate limits\nbased on their contract.\n\nWhen the rate limit is exceeded, the API returns HTTP 429."
+  },
+  {
+    "source": "security_policy.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Information Security Policy\n\nEvery NovaTech employee, contractor, and authorized partner is responsible for protecting company systems, confidential information, customer data, and personal information. Access must be used only for legitimate business purposes and only to the extent required for assigned duties.\n\nUsers must create strong, unique passwords and use company-approved password-management tools. Multi-factor authentication is required wherever available. Passwords, authenti"
+  },
+  {
+    "source": "security_policy.md",
+    "chunk_id": 1,
+    "text": "s required wherever available. Passwords, authentication codes, access badges, and encryption keys must never be shared. Devices must be locked whenever left unattended, even briefly.\n\nCompany work must be performed on approved devices and services. Employees may not move confidential information to personal email, consumer file-sharing sites, unapproved artificial-intelligence tools, or removable storage. Sensitive information must be encrypted when stored or transmitted and shared only with ve"
+  },
+  {
+    "source": "security_policy.md",
+    "chunk_id": 2,
+    "text": "when stored or transmitted and shared only with verified recipients who have a business need to know.\n\nEmployees must install required security updates promptly and may not disable antivirus software, endpoint monitoring, firewalls, or device-management controls. Public Wi-Fi should be avoided for sensitive work unless an approved virtual private network is active. Lost or stolen devices must be reported immediately.\n\nSuspected phishing, malware, unauthorized access, accidental disclosure, or ot"
+  },
+  {
+    "source": "security_policy.md",
+    "chunk_id": 3,
+    "text": "unauthorized access, accidental disclosure, or other security incidents must be reported to the Security team as soon as discovered. Employees should preserve relevant messages and files but must not investigate, delete evidence, or communicate externally about an incident without authorization. Good-faith reports will not result in retaliation.\n\nNovaTech may monitor company systems and accounts as permitted by law to maintain security and investigate misuse. Access is reviewed regularly and re"
+  },
+  {
+    "source": "security_policy.md",
+    "chunk_id": 4,
+    "text": "tigate misuse. Access is reviewed regularly and removed when no longer needed. Violations may lead to restricted access, disciplinary action, termination, or legal consequences. Employees must complete assigned security training and acknowledge this policy annually."
+  },
+  {
+    "source": "employee_benefits.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Employee Benefits Policy\n\nNovaTech provides a competitive benefits program designed to support employees\u2019 health, financial security, professional growth, and overall well-being. Regular full-time employees are eligible for core benefits beginning on the first day of the month following their start date. Part-time and temporary employees may receive benefits based on local law, scheduled hours, and the terms of their employment agreement.\n\nEligible employees may enroll in medical, den"
+  },
+  {
+    "source": "employee_benefits.md",
+    "chunk_id": 1,
+    "text": "nt.\n\nEligible employees may enroll in medical, dental, and vision coverage for themselves and qualified dependents. NovaTech pays a significant portion of employee premiums, while dependent coverage and optional plans may require payroll contributions. Employees may also elect tax-advantaged health and dependent-care accounts where available.\n\nNovaTech offers employer-paid basic life insurance, short-term disability coverage, and access to confidential mental-health and employee-assistance resou"
+  },
+  {
+    "source": "employee_benefits.md",
+    "chunk_id": 2,
+    "text": "ential mental-health and employee-assistance resources. Additional voluntary insurance may be purchased during enrollment periods.\n\nTo support long-term financial health, eligible employees may participate in the company retirement plan. Employer contributions, vesting schedules, and annual limits are described in the official plan documents. NovaTech may also provide equity awards or performance bonuses depending on role, location, and company results; these are not guaranteed unless stated in"
+  },
+  {
+    "source": "employee_benefits.md",
+    "chunk_id": 3,
+    "text": "esults; these are not guaranteed unless stated in writing.\n\nEmployees receive a yearly professional-development allowance for approved courses, certifications, conferences, or job-related materials. Additional benefits may include wellness programs, commuter assistance, parental leave, flexible work arrangements, and company-paid holidays.\n\nEmployees must make benefit elections within the stated enrollment window. Changes outside that period generally require a qualifying life event. Official pl"
+  },
+  {
+    "source": "employee_benefits.md",
+    "chunk_id": 4,
+    "text": "rally require a qualifying life event. Official plan documents and applicable law control if they conflict with this summary. NovaTech may amend its benefits offerings at any time, with advance notice when reasonably possible."
+  },
+  {
+    "source": "refund_policy.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Refund Policy\n\nCustomers subscribed to the Pro plan may request a full refund\nwithin 14 calendar days of their initial purchase.\n\nEnterprise subscriptions are non-refundable after the contract\nhas been signed.\n\nMonthly Basic subscriptions can be canceled at any time,\nbut previously charged subscription fees are not refunded."
+  },
+  {
+    "source": "enterprise_plan.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Enterprise Plan Policy\n\nThe NovaTech Enterprise Plan is designed for organizations that require advanced security, centralized administration, higher service commitments, and tailored deployment support. Enterprise availability, pricing, and minimum commitments are provided through a written order form and may vary according to user count, usage, data residency, integrations, and support requirements.\n\nEnterprise customers receive organization-level administration, role-based access c"
+  },
+  {
+    "source": "enterprise_plan.md",
+    "chunk_id": 1,
+    "text": "nization-level administration, role-based access controls, single sign-on, user provisioning options, audit logs, and configurable data-retention settings where supported. Certain features may require compatible identity providers, customer configuration, or additional technical review. Customers remain responsible for managing authorized users and assigning appropriate permissions.\n\nNovaTech may offer enhanced support, onboarding, solution architecture, migration assistance, and administrator t"
+  },
+  {
+    "source": "enterprise_plan.md",
+    "chunk_id": 2,
+    "text": "tecture, migration assistance, and administrator training. The specific services, response targets, support hours, and named contacts are defined in the applicable agreement. A service-level agreement applies only when expressly included in the order form.\n\nEnterprise customers may request security documentation, compliance reports, vendor questionnaires, and data-processing terms. Access to confidential audit materials may require a nondisclosure agreement. Custom security reviews and specializ"
+  },
+  {
+    "source": "enterprise_plan.md",
+    "chunk_id": 3,
+    "text": "e agreement. Custom security reviews and specialized legal or technical commitments are subject to approval and may involve additional fees.\n\nUnless otherwise agreed, Enterprise subscriptions have an annual term and renew according to the order form. Adding users or capacity during the term may create prorated charges. Reductions normally take effect at renewal and must be requested before the contractual notice deadline.\n\nNovaTech and the customer will each designate an administrative contact."
+  },
+  {
+    "source": "enterprise_plan.md",
+    "chunk_id": 4,
+    "text": "er will each designate an administrative contact. The customer must provide accurate deployment information, timely access to relevant personnel, and reasonable cooperation during implementation. Product functionality may evolve, but NovaTech will not materially reduce purchased core capabilities during the committed term without providing an appropriate remedy under the agreement.\n\nSigned agreements control over this summary whenever terms differ."
+  },
+  {
+    "source": "vacation_policy.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Vacation Policy\n\nNovaTech encourages employees to take meaningful time away from work to rest, recharge, and attend to personal responsibilities. Regular full-time employees receive paid vacation according to their employment agreement and local requirements. Part-time employees may receive prorated vacation based on scheduled hours and applicable law.\n\nEmployees should submit vacation requests through the company\u2019s time-off system as early as possible. Requests for one or two days sh"
+  },
+  {
+    "source": "vacation_policy.md",
+    "chunk_id": 1,
+    "text": "early as possible. Requests for one or two days should normally be submitted at least five business days in advance. Requests for three or more consecutive days should normally be submitted at least three weeks in advance. Emergencies and unexpected circumstances will be considered individually.\n\nManagers approve requests based on team coverage, business deadlines, fairness, and the order in which requests were received. Employees should not purchase nonrefundable travel until approval is confir"
+  },
+  {
+    "source": "vacation_policy.md",
+    "chunk_id": 2,
+    "text": "hase nonrefundable travel until approval is confirmed. During high-demand periods, managers may limit overlapping absences or ask employees to select alternative dates.\n\nBefore beginning vacation, employees must communicate current priorities, identify a backup contact, and provide any information needed to maintain essential operations. Employees are not expected to monitor routine messages while on approved vacation. A manager may contact an employee only for a genuinely urgent matter when no"
+  },
+  {
+    "source": "vacation_policy.md",
+    "chunk_id": 3,
+    "text": "ployee only for a genuinely urgent matter when no reasonable alternative exists.\n\nVacation balances, carryover rules, and any annual caps are displayed in the time-off system and may vary by location. Employees should use available vacation regularly. Unused vacation is paid out at separation only when required by law or the applicable employment agreement.\n\nVacation may not be borrowed against future accrual without written Human Resources approval. Misreporting vacation or working elsewhere du"
+  },
+  {
+    "source": "vacation_policy.md",
+    "chunk_id": 4,
+    "text": "val. Misreporting vacation or working elsewhere during leave in a way that creates a conflict of interest may result in corrective action. This policy does not replace legally protected leave or company sick-leave programs."
+  },
+  {
+    "source": "remote_work_policy.md",
+    "chunk_id": 0,
+    "text": "# NovaTech Remote Work Policy\n\nEmployees may work remotely up to three days per week.\n\nEmployees must work from their assigned office at least two\ndays per week.\n\nFully remote arrangements require approval from both the\nemployee's manager and Human Resources."
+  }
+]
