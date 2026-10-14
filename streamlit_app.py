@@ -43,21 +43,42 @@ EMBEDDING_MODEL = "text-embedding-3-small"
 
 project_directory = Path(__file__).resolve().parent
 storage_directory = project_directory / "vector_store"
+knowledge_base_directory = project_directory / "knowledge_base"
 
 
 @st.cache_resource
-def load_vector_store():
-    """Load the saved FAISS index and its matching chunk metadata once."""
-    loaded_index = faiss.read_index(
-        str(storage_directory / "novatech.index")
-    )
+def load_vector_store(chunk_size):
+    """Load or build a FAISS index for the selected chunk size."""
+    if chunk_size == 500:
+        loaded_index = faiss.read_index(
+            str(storage_directory / "novatech.index")
+        )
 
-    with open(
-        storage_directory / "metadata.json",
-        "r",
-        encoding="utf-8",
-    ) as file:
-        loaded_metadata = json.load(file)
+        with open(
+            storage_directory / "metadata.json",
+            "r",
+            encoding="utf-8",
+        ) as file:
+            loaded_metadata = json.load(file)
+    else:
+        loaded_metadata = build_chunk_metadata(chunk_size)
+
+        if not loaded_metadata:
+            raise ValueError("No Markdown content was found in knowledge_base.")
+
+        embedding_response = client.embeddings.create(
+            model=EMBEDDING_MODEL,
+            input=[item["text"] for item in loaded_metadata],
+        )
+
+        vectors = np.array(
+            [item.embedding for item in embedding_response.data],
+            dtype="float32",
+        )
+        faiss.normalize_L2(vectors)
+
+        loaded_index = faiss.IndexFlatIP(vectors.shape[1])
+        loaded_index.add(vectors)
 
     if loaded_index.ntotal != len(loaded_metadata):
         raise ValueError(
@@ -67,15 +88,54 @@ def load_vector_store():
     return loaded_index, loaded_metadata
 
 
-try:
-    index, chunk_metadata = load_vector_store()
-except (FileNotFoundError, RuntimeError, ValueError) as error:
-    st.error(f"Could not load the vector store: {error}")
-    st.stop()
+def chunk_text(text, chunk_size, overlap=50):
+    """Split text into overlapping character-based chunks."""
+    if overlap >= chunk_size:
+        raise ValueError("Overlap must be smaller than chunk size.")
+
+    chunks = []
+    start = 0
+
+    while start < len(text):
+        end = min(start + chunk_size, len(text))
+        chunk = text[start:end].strip()
+
+        if chunk:
+            chunks.append(chunk)
+
+        if end == len(text):
+            break
+
+        start = end - overlap
+
+    return chunks
 
 
-def retrieve_chunks(question, top_k):
+def build_chunk_metadata(chunk_size):
+    """Load Markdown documents and split them using the selected size."""
+    metadata = []
+
+    for file_path in sorted(knowledge_base_directory.glob("*.md")):
+        text = file_path.read_text(encoding="utf-8")
+
+        for chunk_id, text_chunk in enumerate(
+            chunk_text(text, chunk_size=chunk_size)
+        ):
+            metadata.append(
+                {
+                    "source": file_path.name,
+                    "chunk_id": chunk_id,
+                    "text": text_chunk,
+                }
+            )
+
+    return metadata
+
+
+def retrieve_chunks(question, top_k, chunk_size):
     """Embed a question and return its most similar knowledge-base chunks."""
+    index, chunk_metadata = load_vector_store(chunk_size)
+
     query_response = client.embeddings.create(
         model=EMBEDDING_MODEL,
         input=question,
@@ -168,11 +228,35 @@ top_k = st.slider(
     help="The number of knowledge-base chunks retrieved for the RAG answer.",
 )
 
+chunk_size = st.select_slider(
+    "Chunk size (characters)",
+    options=[200, 500, 1000],
+    value=500,
+    help=(
+        "Changing chunk size rebuilds the document index. The 500-character "
+        "index is prebuilt; other sizes are generated and cached on first use."
+    ),
+)
+
+if chunk_size != 500:
+    st.caption(
+        "The first RAG request for this chunk size will take longer because "
+        "the document embeddings must be generated once."
+    )
+
 if st.session_state.get("active_question") != question:
     st.session_state["active_question"] = question
     st.session_state.pop("without_rag_answer", None)
     st.session_state.pop("with_rag_answer", None)
     st.session_state.pop("retrieved_chunks", None)
+
+retrieval_config = (question, top_k, chunk_size)
+
+if st.session_state.get("retrieval_config") != retrieval_config:
+    st.session_state["retrieval_config"] = retrieval_config
+    st.session_state.pop("with_rag_answer", None)
+    st.session_state.pop("retrieved_chunks", None)
+    st.session_state.pop("retrieved_chunk_size", None)
 
 without_button_column, with_button_column = st.columns(2)
 
@@ -206,9 +290,17 @@ if ask_with_rag:
         st.warning("Enter a question before searching the knowledge base.")
     else:
         try:
-            with st.spinner("Retrieving evidence and generating an answer..."):
-                retrieved_chunks = retrieve_chunks(question, top_k)
+            with st.spinner(
+                f"Retrieving {top_k} chunks at size {chunk_size} and "
+                "generating an answer..."
+            ):
+                retrieved_chunks = retrieve_chunks(
+                    question,
+                    top_k,
+                    chunk_size,
+                )
                 st.session_state["retrieved_chunks"] = retrieved_chunks
+                st.session_state["retrieved_chunk_size"] = chunk_size
 
                 if retrieved_chunks:
                     st.session_state["with_rag_answer"] = generate_with_rag(
@@ -247,6 +339,10 @@ retrieved_chunks = st.session_state.get("retrieved_chunks", [])
 if not retrieved_chunks:
     st.caption("Retrieved filenames, similarity scores, and text appear here.")
 else:
+    st.caption(
+        "Chunk size: "
+        f"{st.session_state.get('retrieved_chunk_size', chunk_size)} characters"
+    )
     for rank, result in enumerate(retrieved_chunks, start=1):
         label = (
             f"#{rank}  {result['source']}  ·  "
