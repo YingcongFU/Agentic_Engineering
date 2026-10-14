@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from pathlib import Path
 
 import faiss
@@ -212,7 +213,11 @@ QUESTION:
         model=GENERATION_MODEL,
         input=prompt,
     )
-    return response.output_text
+    return {
+        "answer": response.output_text,
+        "input_tokens": getattr(response.usage, "input_tokens", 0),
+        "output_tokens": getattr(response.usage, "output_tokens", 0),
+    }
 
 
 question = st.text_input(
@@ -249,6 +254,7 @@ if st.session_state.get("active_question") != question:
     st.session_state.pop("without_rag_answer", None)
     st.session_state.pop("with_rag_answer", None)
     st.session_state.pop("retrieved_chunks", None)
+    st.session_state.pop("rag_metrics", None)
 
 retrieval_config = (question, top_k, chunk_size)
 
@@ -257,6 +263,7 @@ if st.session_state.get("retrieval_config") != retrieval_config:
     st.session_state.pop("with_rag_answer", None)
     st.session_state.pop("retrieved_chunks", None)
     st.session_state.pop("retrieved_chunk_size", None)
+    st.session_state.pop("rag_metrics", None)
 
 without_button_column, with_button_column = st.columns(2)
 
@@ -290,27 +297,53 @@ if ask_with_rag:
         st.warning("Enter a question before searching the knowledge base.")
     else:
         try:
+            total_started = time.perf_counter()
+
             with st.spinner(
                 f"Retrieving {top_k} chunks at size {chunk_size} and "
                 "generating an answer..."
             ):
+                retrieval_started = time.perf_counter()
                 retrieved_chunks = retrieve_chunks(
                     question,
                     top_k,
                     chunk_size,
                 )
+                retrieval_seconds = time.perf_counter() - retrieval_started
                 st.session_state["retrieved_chunks"] = retrieved_chunks
                 st.session_state["retrieved_chunk_size"] = chunk_size
 
                 if retrieved_chunks:
-                    st.session_state["with_rag_answer"] = generate_with_rag(
+                    generation_started = time.perf_counter()
+                    generation_result = generate_with_rag(
                         question,
                         retrieved_chunks,
                     )
+                    generation_seconds = time.perf_counter() - generation_started
+                    st.session_state["with_rag_answer"] = generation_result[
+                        "answer"
+                    ]
                 else:
+                    generation_seconds = 0.0
+                    generation_result = {
+                        "input_tokens": 0,
+                        "output_tokens": 0,
+                    }
                     st.session_state["with_rag_answer"] = (
                         "I don't have enough information in the knowledge base."
                     )
+
+                st.session_state["rag_metrics"] = {
+                    "retrieval_seconds": retrieval_seconds,
+                    "generation_seconds": generation_seconds,
+                    "total_seconds": time.perf_counter() - total_started,
+                    "retrieved_chunks": len(retrieved_chunks),
+                    "input_tokens": generation_result["input_tokens"],
+                    "output_tokens": generation_result["output_tokens"],
+                    "top_score": (
+                        retrieved_chunks[0]["score"] if retrieved_chunks else 0.0
+                    ),
+                }
         except Exception as error:
             st.error(f"The RAG request failed: {error}")
 
@@ -330,6 +363,41 @@ with with_answer_column:
         st.write(st.session_state["with_rag_answer"])
     else:
         st.caption("Select “Ask With RAG” to retrieve and use company context.")
+
+rag_metrics = st.session_state.get("rag_metrics")
+
+if rag_metrics:
+    st.subheader("RAG Metrics")
+    metric_columns = st.columns(7)
+    metric_columns[0].metric(
+        "Retrieval",
+        f"{rag_metrics['retrieval_seconds'] * 1000:.0f} ms",
+    )
+    metric_columns[1].metric(
+        "Generation",
+        f"{rag_metrics['generation_seconds']:.2f} s",
+    )
+    metric_columns[2].metric(
+        "Total",
+        f"{rag_metrics['total_seconds']:.2f} s",
+    )
+    metric_columns[3].metric(
+        "Chunks",
+        rag_metrics["retrieved_chunks"],
+    )
+    metric_columns[4].metric(
+        "Input tokens",
+        rag_metrics["input_tokens"],
+        help="Tokens in the full augmented prompt, including retrieved context.",
+    )
+    metric_columns[5].metric(
+        "Output tokens",
+        rag_metrics["output_tokens"],
+    )
+    metric_columns[6].metric(
+        "Top score",
+        f"{rag_metrics['top_score']:.3f}",
+    )
 
 st.divider()
 st.subheader("Retrieved Context")
@@ -351,3 +419,44 @@ else:
         with st.expander(label, expanded=(rank == 1)):
             st.caption(f"Chunk {result['chunk_id']}")
             st.write(result["text"])
+
+benchmark_results_file = project_directory / "benchmark" / "results.json"
+
+if benchmark_results_file.exists():
+    with open(benchmark_results_file, "r", encoding="utf-8") as file:
+        benchmark_results = json.load(file)
+
+    st.divider()
+    st.subheader("Final Benchmark")
+    st.caption(
+        "Correctness and groundedness are lightweight lexical heuristics; "
+        "review borderline cases manually."
+    )
+    st.dataframe(
+        benchmark_results["rows"],
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    summary = benchmark_results["summary"]
+    summary_columns = st.columns(5)
+    summary_columns[0].metric(
+        f"Evidence Recall@{summary['top_k']}",
+        f"{summary['evidence_recall']:.1%}",
+    )
+    summary_columns[1].metric(
+        "Answer Accuracy",
+        f"{summary['answer_accuracy']:.1%}",
+    )
+    summary_columns[2].metric(
+        "Groundedness",
+        f"{summary['groundedness']:.1%}",
+    )
+    summary_columns[3].metric(
+        "Abstention Accuracy",
+        f"{summary['abstention_accuracy']:.1%}",
+    )
+    summary_columns[4].metric(
+        "Average Latency",
+        f"{summary['average_latency_seconds']:.2f} s",
+    )
