@@ -1,0 +1,52 @@
+[
+  {
+    "question": "How many remote days are employees allowed?",
+    "expected_answer": "3 days per week",
+    "evidence": "remote_work_policy.md"
+  },
+  {
+    "question": "How long is the Pro refund period?",
+    "expected_answer": "14 calendar days",
+    "evidence": "refund_policy.md"
+  },
+  {
+    "question": "What is the Pro API rate limit?",
+    "expected_answer": "1,000 requests per minute",
+    "evidence": "api_limits.md"
+  },
+  {
+    "question": "Can Enterprise customers receive a refund after signing their contract?",
+    "expected_answer": "No, Enterprise subscriptions are non-refundable after signing",
+    "evidence": "refund_policy.md"
+  },
+  {
+    "question": "How far in advance should an employee request three consecutive vacation days?",
+    "expected_answer": "At least three weeks in advance",
+    "evidence": "vacation_policy.md"
+  },
+  {
+    "question": "Is multi-factor authentication required?",
+    "expected_answer": "Yes, wherever available",
+    "evidence": "security_policy.md"
+  },
+  {
+    "question": "Can customers rely on preview features for critical operations?",
+    "expected_answer": "No, unless NovaTech agrees otherwise in writing",
+    "evidence": "product_features.md"
+  },
+  {
+    "question": "What billing periods does NovaTech support?",
+    "expected_answer": "Monthly or annually in advance",
+    "evidence": "pricing.md"
+  },
+  {
+    "question": "Does NovaTech reimburse gym memberships?",
+    "expected_answer": "NOT_FOUND",
+    "evidence": null
+  },
+  {
+    "question": "Does NovaTech provide free employee lunches?",
+    "expected_answer": "NOT_FOUND",
+    "evidence": null
+  }
+]
